@@ -6,7 +6,7 @@
 % Acknowledgment:
 % If you use this code or its derivatives in your research, 
 % presentations, or publications, please acknowledge:
-% Valentin Siderskiy
+% Valentin Siderskiy, [Optional: Field or Topic of Contribution].
 
 clc
 clear
@@ -73,4 +73,4 @@ gainsTable = table;
 gainsTable.frequenciesHz = frequencies';
 gainsTable.amplitude_deg = amplitude';
 gainsTable.gains_m_per_deg = gains';
-disp(gainsTable)
+gainsTable
