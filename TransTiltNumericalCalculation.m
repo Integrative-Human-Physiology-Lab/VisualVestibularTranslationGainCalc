@@ -4,15 +4,15 @@ clc
 clear
 close all
 
-frequencies = [0.03 0.1 0.18]; %Hz
-amplitude  = 25; % degrees
-t  = 0:0.001:100;
+frequencies =   [0.03   0.1     0.18  0.06]; %Hz
+amplitude  =    [25     25      25     25]; % degrees
+t  = 0:0.0001:100;
 
 g = 9.8; %m/s^2
 
 angles =  NaN(length(frequencies),length(t));
 for i = 1:length(frequencies)
-    angles(i,:) = amplitude *cos(t.*frequencies(i)*2*pi);
+    angles(i,:) = amplitude(i) *cos(t.*frequencies(i)*2*pi);
 end
 
 g_utricle = g*sind(angles);
@@ -23,11 +23,11 @@ for i = 1:length(frequencies)
 v_utricle(i,:) = cumtrapz(t,g_utricle(i,:));
 end
 
-start = [224.2387   21.1324    6.5224 ]/2
-
 for i = 1:length(frequencies)
-p_utricle(i,:) = cumtrapz(t,v_utricle(i,:))- start(i);
+    p_utricle(i,:) = cumtrapz(t,v_utricle(i,:));
+    p_utricle(i,:) = p_utricle(i,:) -max(p_utricle(i,:))/2;
 end
+
 
 figure
 subplot(4,1,1)
@@ -59,9 +59,10 @@ legend(legendCell)
 
 
 %Gain Calculations (m/deg)
-gains = max(p_utricle')./amplitude
+gains = max(p_utricle')./amplitude;
 
-gainsTable = table
+gainsTable = table;
 gainsTable.frequenciesHz = frequencies';
+gainsTable.amplitude_deg = amplitude';
 gainsTable.gains_m_per_deg = gains';
-
+gainsTable
