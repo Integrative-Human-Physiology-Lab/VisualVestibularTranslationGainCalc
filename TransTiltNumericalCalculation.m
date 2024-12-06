@@ -13,7 +13,7 @@ clear
 close all
 
 frequencies =   [0.03   0.1     0.18  0.06]; %Hz
-amplitude  =    [25     25      25     25]; % degrees
+amplitude  =    [25     25      25     20]; % degrees
 t  = 0:0.0001:100;
 
 g = 9.8; %m/s^2
